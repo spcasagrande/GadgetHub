@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using GadgetHub.Domain.Abstract;
+using GadgetHub.WebUI.Models;
 
 namespace GadgetHub.WebUI.Controllers
 {
@@ -16,9 +17,25 @@ namespace GadgetHub.WebUI.Controllers
 			this.myRepository = productRepository;
 		}
 
-		public ViewResult List()
+		public int PageSize = 4;
+		public ViewResult List(int page = 1)
 		{
-			return View(myRepository.Products);
+			ProductListViewModel model = new ProductListViewModel
+			{
+				Products = myRepository.Products
+				.OrderBy(p => p.ProductID)
+				.Skip((page - 1) * PageSize)
+				.Take(PageSize),
+
+				PagingInfo = new PagingInfo
+				{
+					CurrentPage = page,
+					ItemsPerPage = PageSize,
+					TotalItems = myRepository.Products.Count()
+				}
+			};
+
+			return View(model);
 		}
 	}
 }

@@ -1,11 +1,10 @@
-﻿@using GadgetHub.Domain.Entities
-@model IEnumerable<Product>
+﻿@model GadgetHub.WebUI.Models.ProductListViewModel
 
 @{
 	ViewBag.Title = "Products";
 }
 
-@foreach (var p in Model)
+@foreach (var p in Model.Products)
 {
 	<div>
 		<h3>Name = @p.Name</h3>
@@ -16,3 +15,7 @@
 		<p>===============</p>
 	</div>
 }
+
+<div>
+	@Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x }))
+</div>
