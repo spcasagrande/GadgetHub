@@ -1,0 +1,22 @@
+﻿@model IEnumerable<string>
+
+@*Home Button*@
+@Html.ActionLink("Home", "List", "Product", null,
+	new { @class = "btn btn-outline-secondary w-100 btn-lg mb-2" })
+
+@*Buttons for each category*@
+@foreach (var link in Model)
+{
+	@Html.RouteLink(link, new
+	{
+		controller = "Product",
+		action = "List",
+		category = link,
+		page = 1
+	},
+	new
+		{
+			@class = "btn btn-outline-secondary w-100 btn-lg mb-2"
+		+ (link == ViewBag.SelectedCategory ? " active" : "")
+		})
+}

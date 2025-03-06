@@ -6,16 +6,9 @@
 
 @foreach (var p in Model.Products)
 {
-	<div>
-		<h3>Name = @p.Name</h3>
-		<h4>Brand = @p.Brand</h4>
-		<h4>Price = @p.Price.ToString("c")</h4>
-		<h4>Desc = @p.Description</h4>
-		<h4>Category = @p.Category</h4>
-		<p>===============</p>
-	</div>
+	@Html.Partial("ProductSummary", p)
 }
 
-<div>
-	@Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x }))
+<div class="btn-group float-end">
+	@Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x, category = Model.CurrentCategory }))
 </div>

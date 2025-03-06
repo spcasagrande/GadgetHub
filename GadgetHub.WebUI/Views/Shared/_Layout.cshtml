@@ -3,11 +3,26 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="~/Content/bootstrap.css" rel="stylesheet" />
 	<title>@ViewBag.Title </title>
 </head>
 <body>
-	<div class="container body-content">
-		@RenderBody()
+	@* Nav bar - displays SPORTS STORE title *@
+	<div class="navbar navbar-dark bg-dark">
+		<a class="navbar-brand ms-4" href="#">SPORTS STORE</a>
+	</div>
+
+	<div class="row border p-3">
+		@* Panel to list the categories *@
+		<div id="categories" class="col-3">
+			@Html.Action("Menu", "Nav")
+		</div>
+
+
+		@* A placeholder <div> to display the body *@
+		<div class="col-9">
+			@RenderBody()
+		</div>
 	</div>
 </body>
 </html>
