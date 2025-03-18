@@ -1,10 +1,17 @@
 ﻿@model GadgetHub.WebUI.Models.CartIndexViewModel
 
 @{
-	ViewBag.Title = "Sports Store: Your Cart";
+	ViewBag.Title = "GadgetHub: Your Cart";
 }
 
 <h2>Your Cart</h2>
+
+<style>
+	#cartTable td 
+	{
+		vertical-align: middle;
+	}
+</style>
 
 <table class="table">
 	<thead>
@@ -46,4 +53,5 @@
 
 <div class="text-center">
 	<a class="btn btn-primary" href="@Model.ReturnUrl">Continue Shopping</a>
+	@Html.ActionLink("Checkout now", "Checkout", null, new { @class = "btn btn-primary" })
 </div>

@@ -7,9 +7,10 @@
 	<title>@ViewBag.Title </title>
 </head>
 <body>
-	@* Nav bar - displays SPORTS STORE title *@
+	@* Nav bar - displays GadgetHub title *@
 	<div class="navbar navbar-dark bg-dark">
-		<a class="navbar-brand ms-4" href="#">SPORTS STORE</a>
+		<a class="navbar-brand ms-4" href="#">GADGETHUB</a>
+		@Html.Action("Summary", "Cart")
 	</div>
 
 	<div class="row border p-3">
