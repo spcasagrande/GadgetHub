@@ -7,6 +7,7 @@ using Moq;
 using GadgetHub.Domain.Abstract;
 using GadgetHub.Domain.Entities;
 using GadgetHub.Domain.Concrete;
+using System.Configuration;
 
 namespace GadgetHub.WebUI.Infrastructure
 {
@@ -43,6 +44,13 @@ namespace GadgetHub.WebUI.Infrastructure
 			*/
 
 			mykernel.Bind<IProductRepository>().To<EFProductRepository>();
+
+			EmailSettings emailSettings = new EmailSettings
+			{
+				WriteAsFile = bool.Parse(System.Configuration.ConfigurationManager.AppSettings["Email.WriteAsFile"] ?? "false")
+			};
+
+			mykernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>().WithConstructorArgument("settings", emailSettings);
 		}
 	}
 }
