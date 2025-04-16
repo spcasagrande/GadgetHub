@@ -6,6 +6,13 @@
 		<span class="badge bg-primary float-end">
 			@Model.Price.ToString("c")
 		</span>
+		@if (Model.ImageData != null)
+		{
+			<div class="pull-left" style="margin-right: 10px">
+				<img class="img-thumbnail" width="150" height="150"
+					 src='@Url.Action("GetImage", "Product", new { Model.ProductID })' />
+			</div>
+		}
 	</h3>
 
 	<span class="lead">@Model.Description</span>

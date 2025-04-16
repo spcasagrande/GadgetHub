@@ -29,5 +29,8 @@ namespace GadgetHub.Domain.Entities
 
 		[Required(ErrorMessage = "Please enter product category")]
 		public string Category { get; set; }
+
+		public byte[] ImageData { get; set; }
+		public string ImageMimeType { get; set; }
 	}
 }

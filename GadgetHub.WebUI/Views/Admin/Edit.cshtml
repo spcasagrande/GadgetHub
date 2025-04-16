@@ -17,7 +17,7 @@
 		<h3>@ViewBag.Title</h3>
 	</div>
 
-	@using (Html.BeginForm("Edit", "Admin"))
+	@using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 		{
 		<div class="card-body">
 			@*Hide the product ID*@
@@ -29,6 +29,8 @@
 				switch (property.PropertyName)
 				{
 					case "ProductID":
+					case "ImageData":
+					case "ImageMimeType":
 						break;
 					default:
 						<div class="mb-3">
@@ -51,6 +53,29 @@
 						break;
 				}
 			}
+			<div class="mb-3">
+				<label class="form-label">Image</label>
+				<div style="position:relative;">
+					<a class="btn btn-secondary" href="javascript:;">
+						Choose File
+						<input type="file" name="Image" size="40"
+							   style="position:absolute;z-index:2;top:0;left:0;opacity:0;
+							   background-color:transparent;color:transparent;"
+							   onchange='$("upload-file-info").html($(this).val());' />
+					</a>
+					<span class="form-label label-info" id="upload-file-info"></span>
+				</div>
+
+				@if (Model.ImageData == null)
+				{
+					<div class="form-text">No Image</div>
+				}
+				else
+				{
+					<img class="img-thumbnail" width="150" height="150"
+						 src='@Url.Action("GetImage", "Product", new { Model.ProductID })' />
+				}
+			</div>
 		</div>
 
 

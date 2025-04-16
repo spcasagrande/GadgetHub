@@ -8,6 +8,8 @@ using GadgetHub.Domain.Abstract;
 using GadgetHub.Domain.Entities;
 using GadgetHub.Domain.Concrete;
 using System.Configuration;
+using GadgetHub.WebUI.Infrastructure.Abstract;
+using GadgetHub.WebUI.Infrastructure.Concrete;
 
 namespace GadgetHub.WebUI.Infrastructure
 {
@@ -51,6 +53,8 @@ namespace GadgetHub.WebUI.Infrastructure
 			};
 
 			mykernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>().WithConstructorArgument("settings", emailSettings);
+
+			mykernel.Bind<IAuthProvider>().To<FormsAuthProvider>();
 		}
 	}
 }
