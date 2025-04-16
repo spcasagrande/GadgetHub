@@ -1,0 +1,62 @@
+﻿@model GadgetHub.Domain.Entities.Product
+
+@{
+	if (Model.ProductID != 0)
+	{
+		ViewBag.Title = "Admin: Edit " + Model.Name;
+	}
+	else
+	{
+		ViewBag.Title = "Admin: Add New Product";
+	}
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+	<div class="card-header">
+		<h3>@ViewBag.Title</h3>
+	</div>
+
+	@using (Html.BeginForm("Edit", "Admin"))
+		{
+		<div class="card-body">
+			@*Hide the product ID*@
+			@Html.HiddenFor(x => x.ProductID)
+
+			@*Display the other fields, pre-filled in*@
+			@foreach (var property in ViewData.ModelMetadata.Properties)
+			{
+				switch (property.PropertyName)
+				{
+					case "ProductID":
+						break;
+					default:
+						<div class="mb-3">
+							<label class="form-label">
+								@(property.DisplayName ?? property.PropertyName)
+							</label>
+
+							@if (property.PropertyName == "Description")
+							{
+								@Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows = 5 })
+							}
+							else
+							{
+								@Html.TextBox(property.PropertyName, null, new { @class = "form-control" })
+							}
+
+							@Html.ValidationMessage(property.PropertyName)
+
+						</div>
+						break;
+				}
+			}
+		</div>
+
+
+		<div class="card-footer">
+			<input type="submit" value="Save" class="btn btn-primary" />
+			@Html.ActionLink("Cancel and return to list", "Index", null, new { @class = "btn btn-primary" })
+		</div>
+	}
+</div>

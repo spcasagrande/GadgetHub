@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using GadgetHub.Domain.Concrete;
 using GadgetHub.Domain.Entities;
 using GadgetHub.WebUI.Infrastructure.Binders;
 
@@ -17,6 +19,8 @@ namespace GadgetHub.WebUI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());
+
+            Database.SetInitializer<EFDbContext>(null);
         }
     }
 }
